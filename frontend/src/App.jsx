@@ -1,11 +1,13 @@
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
-
-import React from "react";
+import { LoginPage } from "./pages/LoginPage";
+import { CashierPage } from "./pages/CashierPage";
 
 export const App = () => {
   return (
-    <div>
-      <h1 className="text-xl text-red-500">Hwllo</h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<CashierPage />} />
+      <Route path="/login" element={<LoginPage />} />
+    </Routes>
   );
 };
