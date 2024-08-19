@@ -16,13 +16,13 @@ export const Clock = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <>
+    <div className="flex flex-col items-end">
       <h2 className="text-lg">
         {day}/{month}/{year}
       </h2>
       <h2 className="text-lg">
         {hours}:{minutes}:{seconds}
       </h2>
-    </>
+    </div>
   );
 };

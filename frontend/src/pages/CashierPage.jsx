@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { CashierHeader } from "../components/CashierHeader";
 import { Input } from "../components/Input";
 import { ProductCartCard } from "../components/ProductCartCard";
 import { ProductListCard } from "../components/ProductListCard";
+import { productsData } from "../data/products";
 
 export const CashierPage = () => {
-  const products = true;
+  const [products, setProducts] = useState(productsData);
+
+  console.log(products);
   return (
     <div className="w-full p-8 bg-black/5">
       <CashierHeader />
@@ -33,28 +37,15 @@ export const CashierPage = () => {
           </form>
           <div className="bg-white py-4 ">
             <div className="flex flex-wrap  gap-6  items-center overflow-hidden">
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
-              <ProductListCard />
+              {products.length > 0 ? (
+                products.map((product) => (
+                  <ProductListCard key={product.id} product={product} />
+                ))
+              ) : (
+                <h1 className=" text-3xl mx-auto">
+                  There is no product for looking for!
+                </h1>
+              )}
             </div>
           </div>
         </div>
