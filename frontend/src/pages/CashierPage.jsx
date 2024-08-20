@@ -7,8 +7,8 @@ import { productsData } from "../data/products";
 
 export const CashierPage = () => {
   const [products, setProducts] = useState(productsData);
+  const [cartProducts, setCartProducts] = useState([]);
 
-  console.log(products);
   return (
     <div className="w-full p-8 bg-black/5">
       <CashierHeader />
