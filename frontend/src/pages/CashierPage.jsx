@@ -5,7 +5,11 @@ import { ProductCartCard } from "../components/ProductCartCard";
 import { ProductListCard } from "../components/ProductListCard";
 import { productsData } from "../data/products";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, increaseItemQuantity } from "../redux/reducers/cartReducer";
+import {
+  addToCart,
+  decrementItemQuantity,
+  increaseItemQuantity,
+} from "../redux/reducers/cartReducer";
 
 export const CashierPage = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -19,6 +23,10 @@ export const CashierPage = () => {
 
   const increaseQuantity = (item) => {
     dispatch(increaseItemQuantity(item));
+  };
+
+  const decrementQuantity = (item) => {
+    dispatch(decrementItemQuantity(item));
   };
 
   return (
@@ -76,6 +84,7 @@ export const CashierPage = () => {
                     key={item.id}
                     item={item}
                     onIncrease={() => increaseQuantity(item)}
+                    onDecrement={() => decrementQuantity(item)}
                   />
                 ))}
               </>
