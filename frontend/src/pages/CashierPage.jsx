@@ -4,10 +4,20 @@ import { Input } from "../components/Input";
 import { ProductCartCard } from "../components/ProductCartCard";
 import { ProductListCard } from "../components/ProductListCard";
 import { productsData } from "../data/products";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/reducers/cartReducer";
 
 export const CashierPage = () => {
+  const { cartItems } = useSelector((state) => state.cart);
   const [products, setProducts] = useState(productsData);
-  const [cartProducts, setCartProducts] = useState([]);
+
+  const dispatch = useDispatch();
+
+  const addItemToCart = (item, quantity = 1) => {
+    dispatch(addToCart({ ...item, quantity }));
+  };
+
+  console.log(cartItems);
 
   return (
     <div className="w-full p-8 bg-black/5">
@@ -39,7 +49,11 @@ export const CashierPage = () => {
             <div className="flex flex-wrap  gap-6  items-center overflow-hidden">
               {products.length > 0 ? (
                 products.map((product) => (
-                  <ProductListCard key={product.id} product={product} />
+                  <ProductListCard
+                    key={product.id}
+                    product={product}
+                    onClickAdd={() => addItemToCart(product)}
+                  />
                 ))
               ) : (
                 <h1 className=" text-3xl mx-auto">
@@ -53,29 +67,11 @@ export const CashierPage = () => {
           <h1 className="font-semibold text-3xl text-center">Cart</h1>
           <h2 className="text-xl px-4 mb-6">0 Products at Cart</h2>
           <div className="flex flex-col gap-4 h-full w-full">
-            {products ? (
+            {cartItems.length > 0 ? (
               <>
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
-                <ProductCartCard />
+                {cartItems.map((item) => (
+                  <ProductCartCard key={item.id} item={item} />
+                ))}
               </>
             ) : (
               <h1 className="text-3xl text-center">

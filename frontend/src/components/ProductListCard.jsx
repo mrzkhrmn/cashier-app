@@ -1,4 +1,10 @@
-export const ProductListCard = ({ product }) => {
+import { useSelector } from "react-redux";
+
+export const ProductListCard = ({ product, onClickAdd }) => {
+  const { cartItems } = useSelector((state) => state.cart);
+
+  const itemInCart = cartItems.find((item) => item.id === product.id);
+
   return (
     <div className="flex flex-col items-center justify-center gap-2 bg-black/5 rounded-lg overflow-hidden w-[210px]">
       <img
@@ -11,8 +17,12 @@ export const ProductListCard = ({ product }) => {
         <p>#843313</p>
         <p>{product.price}$</p>
       </div>
-      <button className="w-full bg-yellow-300 hover:bg-yellow-400 transition duration-200 py-2 ">
-        Add To Cart
+      <button
+        disabled={itemInCart}
+        onClick={onClickAdd}
+        className="w-full bg-yellow-300 hover:bg-yellow-400 transition duration-200 py-2 disabled:opacity-60 disabled:pointer-events-none"
+      >
+        {itemInCart ? "Added To Cart" : "Add To Cart"}
       </button>
     </div>
   );
