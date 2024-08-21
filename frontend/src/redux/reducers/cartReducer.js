@@ -27,9 +27,18 @@ const cartSlice = createSlice({
       }
       return updateCart(state);
     },
+    increaseItemQuantity: (state, action) => {
+      const item = action.payload;
+
+      const itemExists = state.cartItems.find((i) => i.id === item.id);
+
+      itemExists.quantity += 1;
+
+      return updateCart(state);
+    },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, increaseItemQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;

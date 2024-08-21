@@ -5,7 +5,7 @@ import { ProductCartCard } from "../components/ProductCartCard";
 import { ProductListCard } from "../components/ProductListCard";
 import { productsData } from "../data/products";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../redux/reducers/cartReducer";
+import { addToCart, increaseItemQuantity } from "../redux/reducers/cartReducer";
 
 export const CashierPage = () => {
   const { cartItems } = useSelector((state) => state.cart);
@@ -17,7 +17,9 @@ export const CashierPage = () => {
     dispatch(addToCart({ ...item, quantity }));
   };
 
-  console.log(cartItems);
+  const increaseQuantity = (item) => {
+    dispatch(increaseItemQuantity(item));
+  };
 
   return (
     <div className="w-full p-8 bg-black/5">
@@ -70,7 +72,11 @@ export const CashierPage = () => {
             {cartItems.length > 0 ? (
               <>
                 {cartItems.map((item) => (
-                  <ProductCartCard key={item.id} item={item} />
+                  <ProductCartCard
+                    key={item.id}
+                    item={item}
+                    onIncrease={() => increaseQuantity(item)}
+                  />
                 ))}
               </>
             ) : (
