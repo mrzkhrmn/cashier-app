@@ -27,17 +27,17 @@ export const CashierPage = () => {
     setSortData(value);
 
     if (value === "name") {
-      const sortedProducts = products.sort((a, b) =>
+      const sortedProducts = [...products].sort((a, b) =>
         a.title.localeCompare(b.title)
       );
       setProducts(sortedProducts);
     }
     if (value === "price") {
-      const sortedProducts = products.sort((a, b) => a.price - b.price);
+      const sortedProducts = [...products].sort((a, b) => a.price - b.price);
       setProducts(sortedProducts);
     }
     if (value === "category") {
-      const sortedProducts = products.sort((a, b) =>
+      const sortedProducts = [...products].sort((a, b) =>
         a.category.localeCompare(b.category)
       );
       setProducts(sortedProducts);
