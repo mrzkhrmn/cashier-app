@@ -20,6 +20,7 @@ export const ProductListCard = ({ product }) => {
         className="w-full h-60 object-cover"
       />
       <p className="px-2 line-clamp-1">{product.title}</p>
+      <p className="self-start px-2 text-gray-500">{product.category}</p>
       <div className="flex justify-between items-center w-full px-2">
         <p>#843313</p>
         <p>{product.price}$</p>

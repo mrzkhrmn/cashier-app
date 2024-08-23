@@ -13,6 +13,8 @@ export const CashierPage = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const [products, setProducts] = useState(productsData);
   const [quickProducts, setQuickProducts] = useState(quickProductsData);
+  const [sortData, setSortData] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const dispatch = useDispatch();
 
@@ -20,24 +22,63 @@ export const CashierPage = () => {
     dispatch(clearCart());
   };
 
+  const handleSorting = (e) => {
+    const value = e.target.value;
+    setSortData(value);
+
+    if (value === "name") {
+      const sortedProducts = products.sort((a, b) =>
+        a.title.localeCompare(b.title)
+      );
+      setProducts(sortedProducts);
+    }
+    if (value === "price") {
+      const sortedProducts = products.sort((a, b) => a.price - b.price);
+      setProducts(sortedProducts);
+    }
+    if (value === "category") {
+      const sortedProducts = products.sort((a, b) =>
+        a.category.localeCompare(b.category)
+      );
+      setProducts(sortedProducts);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const filteredItems = productsData.filter((p) =>
+        p.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setProducts(filteredItems);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div className="w-full p-8 bg-black/5">
       <CashierHeader />
       <div className="h-[85vh] flex gap-4">
         <div className=" w-[60%] h-full rounded-md p-4 border border-black/20 overflow-auto">
-          <form className="w-full flex items-center justify-between gap-4 mb-6">
+          <form
+            className="w-full flex items-center justify-between gap-4 mb-6"
+            onSubmit={handleSubmit}
+          >
             <div className="w-full flex">
               <Input
+                onChange={(e) => setSearchTerm(e.target.value)}
                 style="w-full py-2 rounded-l-md px-2 outline-none"
                 placeholder={"Search for products..."}
+                required={false}
               />
               <button className="bg-blue-400 px-4 rounded-r-md text-white hover:bg-blue-500 transition duration-200">
                 Search
               </button>
             </div>
             <select
-              name="sort"
-              id="sort"
+              onChange={handleSorting}
+              value={sortData}
               className="py-2 pl-4 pr-2 bg-transparent border outline-none border-black rounded-md"
             >
               <option value="">Sort By</option>

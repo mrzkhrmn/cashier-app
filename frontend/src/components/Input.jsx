@@ -6,6 +6,7 @@ export const Input = ({
   value,
   onChange,
   placeholder,
+  required = true,
 }) => {
   return (
     <>
@@ -18,7 +19,7 @@ export const Input = ({
         placeholder={placeholder}
         id={id}
         name={id}
-        required
+        required={required}
       />
     </>
   );
