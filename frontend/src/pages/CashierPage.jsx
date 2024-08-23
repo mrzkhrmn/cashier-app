@@ -11,10 +11,13 @@ import {
   deleteItem,
   increaseItemQuantity,
 } from "../redux/reducers/cartReducer";
+import { quickProductsData } from "../data/quickProducts";
+import { QuickProductButton } from "../components/QuickProductButton";
 
 export const CashierPage = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const [products, setProducts] = useState(productsData);
+  const [quickProducts, setQuickProducts] = useState(quickProductsData);
 
   const dispatch = useDispatch();
 
@@ -37,7 +40,7 @@ export const CashierPage = () => {
   return (
     <div className="w-full p-8 bg-black/5">
       <CashierHeader />
-      <div className="h-[80vh] flex gap-4">
+      <div className="h-[85vh] flex gap-4">
         <div className=" w-[60%] h-full rounded-md p-4 border border-black/20 overflow-auto">
           <form className="w-full flex items-center justify-between gap-4 mb-6">
             <div className="w-full flex">
@@ -61,7 +64,7 @@ export const CashierPage = () => {
             </select>
           </form>
           <div className="bg-white py-4 ">
-            <div className="flex flex-wrap  gap-6  items-center overflow-hidden">
+            <div className="flex flex-wrap  gap-6  items-center overflow-hidden justify-center">
               {products.length > 0 ? (
                 products.map((product) => (
                   <ProductListCard
@@ -78,10 +81,21 @@ export const CashierPage = () => {
             </div>
           </div>
         </div>
-        <div className="w-[40%] h-full rounded-md py-4 border border-black/20 overflow-auto">
+        <div className="w-[40%] h-full rounded-md py-4 border border-black/20 overflow-hidden overflow-y-auto">
           <h1 className="font-semibold text-3xl text-center">Cart</h1>
-          <h2 className="text-xl px-4 mb-6">0 Products at Cart</h2>
-          <div className="flex flex-col gap-4 h-full w-full">
+          <div className="flex justify-between items-center gap-1 px-4 my-6">
+            {quickProducts.map((product) => (
+              <QuickProductButton
+                key={product.id}
+                product={product}
+                onAddQuickProduct={() => addItemToCart(product)}
+              />
+            ))}
+          </div>
+          <h2 className="text-xl px-4 mb-6">
+            {cartItems.length} Products at Cart
+          </h2>
+          <div className="flex flex-col gap-4 h-full w-full  ">
             {cartItems.length > 0 ? (
               <>
                 {cartItems.map((item) => (
