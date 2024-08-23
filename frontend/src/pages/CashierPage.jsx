@@ -7,6 +7,7 @@ import { productsData } from "../data/products";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
+  clearCart,
   decrementItemQuantity,
   deleteItem,
   increaseItemQuantity,
@@ -35,6 +36,10 @@ export const CashierPage = () => {
 
   const handleDeleteItem = (item) => {
     dispatch(deleteItem(item));
+  };
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
   };
 
   return (
@@ -91,6 +96,12 @@ export const CashierPage = () => {
                 onAddQuickProduct={() => addItemToCart(product)}
               />
             ))}
+            <button
+              onClick={handleClearCart}
+              className="bg-red-400 py-2 px-3 rounded-md hover:bg-red-500 transition duration-200 h-[65px] text-white"
+            >
+              Clear Cart
+            </button>
           </div>
           <h2 className="text-xl px-4 mb-6">
             {cartItems.length} Products at Cart
