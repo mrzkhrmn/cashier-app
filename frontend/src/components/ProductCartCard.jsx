@@ -1,11 +1,26 @@
 import { FaTrash } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import {
+  decrementItemQuantity,
+  increaseItemQuantity,
+  deleteItem,
+} from "../redux/reducers/cartReducer";
 
-export const ProductCartCard = ({
-  item,
-  onIncrease,
-  onDecrement,
-  onDelete,
-}) => {
+export const ProductCartCard = ({ item }) => {
+  const dispatch = useDispatch();
+
+  const increaseQuantity = (item) => {
+    dispatch(increaseItemQuantity(item));
+  };
+
+  const decrementQuantity = (item) => {
+    dispatch(decrementItemQuantity(item));
+  };
+
+  const handleDeleteItem = (item) => {
+    dispatch(deleteItem(item));
+  };
+
   return (
     <div className="flex items-center justify-between bg-white pr-6 pl-4 py-2">
       <img
@@ -19,14 +34,14 @@ export const ProductCartCard = ({
       </div>
       <div className="flex items-center gap-2">
         <button
-          onClick={onDecrement}
+          onClick={() => decrementQuantity(item)}
           className="py-.5 px-2 rounded-full bg-black/5 hover:bg-black/10 transition duration-200"
         >
           -
         </button>
         <p>{item.quantity} Qty</p>
         <button
-          onClick={onIncrease}
+          onClick={() => increaseQuantity(item)}
           className="py-.5 px-2 rounded-full bg-black/5 hover:bg-black/10 transition duration-200"
         >
           +
@@ -37,7 +52,7 @@ export const ProductCartCard = ({
       </div>
       <div>
         <button
-          onClick={onDelete}
+          onClick={() => handleDeleteItem(item)}
           className="text-red-500 hover:bg-red-200 transition duration-200 px-2 py-3 rounded-full"
         >
           <FaTrash />

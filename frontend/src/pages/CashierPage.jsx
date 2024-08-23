@@ -5,13 +5,7 @@ import { ProductCartCard } from "../components/ProductCartCard";
 import { ProductListCard } from "../components/ProductListCard";
 import { productsData } from "../data/products";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addToCart,
-  clearCart,
-  decrementItemQuantity,
-  deleteItem,
-  increaseItemQuantity,
-} from "../redux/reducers/cartReducer";
+import { clearCart } from "../redux/reducers/cartReducer";
 import { quickProductsData } from "../data/quickProducts";
 import { QuickProductButton } from "../components/QuickProductButton";
 
@@ -21,22 +15,6 @@ export const CashierPage = () => {
   const [quickProducts, setQuickProducts] = useState(quickProductsData);
 
   const dispatch = useDispatch();
-
-  const addItemToCart = (item, quantity = 1) => {
-    dispatch(addToCart({ ...item, quantity }));
-  };
-
-  const increaseQuantity = (item) => {
-    dispatch(increaseItemQuantity(item));
-  };
-
-  const decrementQuantity = (item) => {
-    dispatch(decrementItemQuantity(item));
-  };
-
-  const handleDeleteItem = (item) => {
-    dispatch(deleteItem(item));
-  };
 
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -72,11 +50,7 @@ export const CashierPage = () => {
             <div className="flex flex-wrap  gap-6  items-center overflow-hidden justify-center">
               {products.length > 0 ? (
                 products.map((product) => (
-                  <ProductListCard
-                    key={product.id}
-                    product={product}
-                    onClickAdd={() => addItemToCart(product)}
-                  />
+                  <ProductListCard key={product.id} product={product} />
                 ))
               ) : (
                 <h1 className=" text-3xl mx-auto">
@@ -90,11 +64,7 @@ export const CashierPage = () => {
           <h1 className="font-semibold text-3xl text-center">Cart</h1>
           <div className="flex justify-between items-center gap-1 px-4 my-6">
             {quickProducts.map((product) => (
-              <QuickProductButton
-                key={product.id}
-                product={product}
-                onAddQuickProduct={() => addItemToCart(product)}
-              />
+              <QuickProductButton key={product.id} product={product} />
             ))}
             <button
               onClick={handleClearCart}
@@ -110,13 +80,7 @@ export const CashierPage = () => {
             {cartItems.length > 0 ? (
               <>
                 {cartItems.map((item) => (
-                  <ProductCartCard
-                    key={item.id}
-                    item={item}
-                    onIncrease={() => increaseQuantity(item)}
-                    onDecrement={() => decrementQuantity(item)}
-                    onDelete={() => handleDeleteItem(item)}
-                  />
+                  <ProductCartCard key={item.id} item={item} />
                 ))}
               </>
             ) : (

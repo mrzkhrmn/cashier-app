@@ -1,7 +1,14 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../redux/reducers/cartReducer";
 
-export const ProductListCard = ({ product, onClickAdd }) => {
+export const ProductListCard = ({ product }) => {
   const { cartItems } = useSelector((state) => state.cart);
+
+  const dispatch = useDispatch();
+
+  const addItemToCart = (item, quantity = 1) => {
+    dispatch(addToCart({ ...item, quantity }));
+  };
 
   const itemInCart = cartItems.find((item) => item.id === product.id);
 
@@ -19,7 +26,7 @@ export const ProductListCard = ({ product, onClickAdd }) => {
       </div>
       <button
         disabled={itemInCart}
-        onClick={onClickAdd}
+        onClick={() => addItemToCart(product)}
         className="w-full bg-yellow-300 hover:bg-yellow-400 transition duration-200 py-2 disabled:opacity-60 disabled:pointer-events-none"
       >
         {itemInCart ? "Added To Cart" : "Add To Cart"}
