@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
   decrementItemQuantity,
+  deleteItem,
   increaseItemQuantity,
 } from "../redux/reducers/cartReducer";
 
@@ -27,6 +28,10 @@ export const CashierPage = () => {
 
   const decrementQuantity = (item) => {
     dispatch(decrementItemQuantity(item));
+  };
+
+  const handleDeleteItem = (item) => {
+    dispatch(deleteItem(item));
   };
 
   return (
@@ -85,6 +90,7 @@ export const CashierPage = () => {
                     item={item}
                     onIncrease={() => increaseQuantity(item)}
                     onDecrement={() => decrementQuantity(item)}
+                    onDelete={() => handleDeleteItem(item)}
                   />
                 ))}
               </>

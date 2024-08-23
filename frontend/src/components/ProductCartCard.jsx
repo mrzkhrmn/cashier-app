@@ -1,6 +1,11 @@
 import { FaTrash } from "react-icons/fa";
 
-export const ProductCartCard = ({ item, onIncrease, onDecrement }) => {
+export const ProductCartCard = ({
+  item,
+  onIncrease,
+  onDecrement,
+  onDelete,
+}) => {
   return (
     <div className="flex items-center justify-between bg-white pr-6 pl-4 py-2">
       <img
@@ -31,7 +36,10 @@ export const ProductCartCard = ({ item, onIncrease, onDecrement }) => {
         <p className="text-lg font-semibold">{item.price}$</p>
       </div>
       <div>
-        <button className="text-red-500 hover:bg-red-200 transition duration-200 px-2 py-3 rounded-full">
+        <button
+          onClick={onDelete}
+          className="text-red-500 hover:bg-red-200 transition duration-200 px-2 py-3 rounded-full"
+        >
           <FaTrash />
         </button>
       </div>
