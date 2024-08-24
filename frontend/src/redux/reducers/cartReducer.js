@@ -1,7 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { updateCart } from "../utils/cartUtils";
 
-const initialState = { cartItems: [] };
+const initialState = {
+  cartItems: [],
+  itemsPrice: 0,
+  paymentPrice: 0,
+  paymentAmount: 0,
+  remainingAmount: 0,
+  changeAmount: 0,
+  paymentHistory: [],
+};
 
 const cartSlice = createSlice({
   name: "cart",
@@ -49,6 +57,15 @@ const cartSlice = createSlice({
 
       return updateCart(state);
     },
+    setPaymentAmount: (state, action) => {
+      const payment = action.payload;
+
+      state.paymentHistory.push(payment);
+
+      state.paymentAmount += payment;
+
+      return updateCart(state);
+    },
     deleteItem: (state, action) => {
       const item = action.payload;
 
@@ -68,6 +85,7 @@ export const {
   addToCart,
   increaseItemQuantity,
   decrementItemQuantity,
+  setPaymentAmount,
   deleteItem,
   clearCart,
 } = cartSlice.actions;

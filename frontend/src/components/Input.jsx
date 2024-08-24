@@ -2,7 +2,7 @@ export const Input = ({
   label,
   id,
   type = "text",
-  style = "bg-[#FFF6F4] p-2",
+  style = "bg-[#FFF6F4] p-2 outline-none",
   value,
   onChange,
   placeholder,
