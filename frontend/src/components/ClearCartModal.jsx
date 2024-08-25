@@ -4,7 +4,6 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 export const ClearCartModel = ({ openModal, setOpenModal, onClearCart }) => {
   return (
     <>
-      <Button onClick={() => setOpenModal(true)}>Toggle modal</Button>
       <Modal
         show={openModal}
         size="md"

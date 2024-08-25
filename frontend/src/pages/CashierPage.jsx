@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../redux/reducers/cartReducer";
 import { quickProductsData } from "../data/quickProducts";
 import { QuickProductButton } from "../components/QuickProductButton";
-import { Button, Modal } from "flowbite-react";
 import { PayWithCashModal } from "../components/PayWithCashModal";
 import { PayWithCardModal } from "../components/PayWithCardModal";
 import { ClearCartModel } from "../components/ClearCartModal";
@@ -160,7 +159,7 @@ export const CashierPage = () => {
             <div className="h-32 w-full flex flex-col justify-center items-center gap-1">
               <div className="flex items-center justify-between text-xl w-full p-2">
                 <p>Total Cash Price:</p>
-                <p>{itemsPrice}$</p>
+                <p>{itemsPrice.toFixed(2)}$</p>
               </div>
               <div className="flex items-center gap-1 w-full h-full">
                 <button

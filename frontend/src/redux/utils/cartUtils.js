@@ -8,6 +8,9 @@ export const updateCart = (state, action) => {
     (acc, payment) => acc + payment,
     0
   );
+
+  state.paymentAmount = totalPaid;
+
   state.remainingAmount = Math.max(state.itemsPrice - totalPaid, 0);
 
   // Calculate the change if the total payment amount exceeds the total price

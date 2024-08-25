@@ -4,7 +4,6 @@ import { updateCart } from "../utils/cartUtils";
 const initialState = {
   cartItems: [],
   itemsPrice: 0,
-  paymentPrice: 0,
   paymentAmount: 0,
   remainingAmount: 0,
   changeAmount: 0,
@@ -75,6 +74,15 @@ const cartSlice = createSlice({
 
       return updateCart(state);
     },
+    removePayment: (state, action) => {
+      const index = action.payload;
+
+      if (index >= 0 && index < state.paymentHistory.length) {
+        state.paymentHistory.splice(index, 1);
+      }
+
+      return updateCart(state);
+    },
     clearCart: (state) => {
       return initialState;
     },
@@ -88,6 +96,7 @@ export const {
   setPaymentAmount,
   deleteItem,
   clearCart,
+  removePayment,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
