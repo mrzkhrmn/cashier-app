@@ -17,5 +17,20 @@ export const updateCart = (state, action) => {
   state.changeAmount =
     totalPaid > state.itemsPrice ? totalPaid - state.itemsPrice : 0;
 
+  if (state.isCardPayment && state.installmentOption) {
+    state.totalWithInterest = state.itemsPrice * 1.1;
+
+    const installmentAmount = state.totalWithInterest / state.installmentOption;
+    state.installmentDetails = Array(state.installmentOption).fill(
+      installmentAmount
+    );
+  } else if (state.isSinglePayment) {
+    state.totalWithInterest = state.itemsPrice;
+    state.installmentDetails = [];
+  } else {
+    state.totalWithInterest = state.itemsPrice;
+    state.installmentDetails = [];
+  }
+
   return state;
 };

@@ -32,6 +32,7 @@ export const LoginPage = () => {
                   type="email"
                   placeholder={"Your email here..."}
                   id={"email"}
+                  style="rounded-md bg-[#FFF6F4] outline-none"
                 />
               </div>
               <div className="flex flex-col">
@@ -42,6 +43,7 @@ export const LoginPage = () => {
                   type="password"
                   placeholder={"Your password here..."}
                   id={"password"}
+                  style="rounded-md bg-[#FFF6F4] outline-none"
                 />
               </div>
               <button
@@ -53,7 +55,7 @@ export const LoginPage = () => {
             </form>
           </div>
         </div>
-        <div className="bg-[#ffdac2] xl:block hidden flex-[1_1_0]"></div>
+        <div className="bg-[#ffdac2]  xl:block hidden flex-[1_1_0]"></div>
         <div className="xl:block hidden absolute w-[650px] left-[55%] top-[15%]">
           <img src="./login.png" alt="singup image" />
         </div>

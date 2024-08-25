@@ -5,7 +5,7 @@ export const Clock = () => {
   const day = ("0" + time.getDate()).slice(-2);
   const month = ("0" + (time.getMonth() + 1)).slice(-2);
   const year = time.getFullYear();
-  const hours = time.getHours();
+  const hours = ("0" + time.getHours()).slice(-2);
   const minutes = ("0" + time.getMinutes()).slice(-2);
   const seconds = ("0" + time.getSeconds()).slice(-2);
 

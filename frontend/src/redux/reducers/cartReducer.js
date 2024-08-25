@@ -8,6 +8,11 @@ const initialState = {
   remainingAmount: 0,
   changeAmount: 0,
   paymentHistory: [],
+  isCardPayment: false,
+  installmentOption: null,
+  totalWithInterest: 0,
+  installmentDetails: [],
+  isSinglePayment: false,
 };
 
 const cartSlice = createSlice({
@@ -74,6 +79,21 @@ const cartSlice = createSlice({
 
       return updateCart(state);
     },
+    setCardPayment: (state, action) => {
+      state.isCardPayment = action.payload;
+      return updateCart(state);
+    },
+    setInstallmentOption: (state, action) => {
+      state.installmentOption = action.payload;
+      return updateCart(state);
+    },
+    setSinglePayment: (state) => {
+      state.isSinglePayment = true;
+      state.isCardPayment = true;
+      state.installmentOption = null;
+
+      return updateCart(state);
+    },
     removePayment: (state, action) => {
       const index = action.payload;
 
@@ -95,8 +115,11 @@ export const {
   decrementItemQuantity,
   setPaymentAmount,
   deleteItem,
+  setCardPayment,
+  setInstallmentOption,
   clearCart,
   removePayment,
+  setSinglePayment,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
